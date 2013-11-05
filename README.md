@@ -1,0 +1,1 @@
+Algorithm, that calculates a path using backwards chaining.
