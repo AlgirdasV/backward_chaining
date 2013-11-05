@@ -1,0 +1,7 @@
+X F B             //koment
+F C D			//koment
+D A
+
+A B C		//koment
+
+Z			//koment
