@@ -8,4 +8,4 @@ main.o: main.cpp
 algorithm.o: algorithm.cpp 
 	$(CC) -g -c algorithm.cpp
 clean:
-	\rm *.o *~ kodavimas
+	\rm *.o *~ isvedimas

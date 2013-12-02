@@ -1,7 +1,10 @@
-Z F B
-F C D
-D G
+1) Taisyklės	//pvz., kur tikslo pasiekti neimanoma 
+Z F B         //R1 : F, B -> Z
+F C D					//R2 : C, D -> F
+D G						//R3 : G -> D
 
-A B C
+2) Faktai
+A B C			
 
-Z
+3) Tikslas
+Z			

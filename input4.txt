@@ -1,11 +1,13 @@
-L A
-K L
-A D
-M D
-Z F B
-F C D
-D A
+1) Taisyklės	//pvz. su 7 produkcijomis
+L A			// R1 : A -> L
+K L			// R2 : L -> K
+A D			// R3 : D -> A
+Z F B		// R4 : F, B -> Z
+F C D		// R5 : C, D -> F
+D A			// R6 : A -> D
 
+2) Faktai
 A B C
 
+3) Tikslas
 Z

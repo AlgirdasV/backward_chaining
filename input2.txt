@@ -1,4 +1,10 @@
+1) Taisyklės	//pvz., kai tikslas tarp faktu
+ZFB            //R1 : F, B -> Z
+FCD            //R2 : C, D -> F
+DA             //R3 : A -> D
 
+2) Faktai
 A B C
 
+3) Tikslas
 C

@@ -1,7 +1,10 @@
-Z F B             //koment
-F C D			//koment
-D A
+1) Taisyklės
+Z F B           //F, B -> Z
+F C D						//C, D -> F
+D A							//A    -> D
 
-A B C		//koment
+2) Faktai
+A B C					
 
-Z			//koment
+3) Tikslas
+Z				

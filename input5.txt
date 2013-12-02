@@ -1,7 +1,16 @@
-X F B             //koment
-F C D			//koment
-D A
+1) Taisyklės
+Z D C			// R1 : D, C -> Z
+D C				// R2 : C -> D
+C B				// R3 : B -> C
+B A				// R4 : A -> B
+A D				// R5 : D -> A
+D T				// R6 : T -> D
+A G				// R7 : G -> A
+B H				// R8 : H -> B
+C J				// R9 : J -> C
 
-A B C		//koment
+2) Faktai
+T
 
-Z			//koment
+3) Tikslas
+Z
