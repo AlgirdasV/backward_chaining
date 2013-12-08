@@ -12,6 +12,7 @@ void spausdinti_plana();
 void spausdinti_busena();
 void print_vector(std::vector <int> );
 void print_vector(std::vector <char> );
+bool salygos_patenkintos(int taisykle);
 
 extern std::vector<char> faktai;
 extern std::string tikslas;
