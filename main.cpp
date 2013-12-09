@@ -19,10 +19,12 @@ int main( int argc, const char* argv[] )	//pagrindine funkcija,
 														//nuskaito ir atspausdina failo duomenis,														
 {														//bei paleidzia tiesioginio isvedimo algoritma.
 	cout << "\nPrograma pradeda darba\n\n";
+	vector<string> atsakymas;
 	if ( ivesti() ){
 		spausdinti();
-		backward_chaining(tikslas[0], 0);
+		atsakymas = backward_chaining(tikslas[0], 0);
 	}
+	print_answer(atsakymas);
 	cout << "\nPrograma baigia darba\n";
 }
 
