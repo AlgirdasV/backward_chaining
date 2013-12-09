@@ -148,9 +148,9 @@ void print_vector(vector <int> vektorius){
 	}
 	cout << endl;
 }
-void print_answer(vector <string> vektorius){
+void print_answer(vector <int> vektorius){
 	for (int el = 0; el < vektorius.size(); ++el) {
-		cout <<"R"<<  vektorius[el] << " ";
+		cout <<"R"<<  vektorius[el]+1 << " ";
 	}
 	cout << endl;
 }

@@ -14,7 +14,7 @@ void print_vector(std::vector <int> );
 void print_vector(std::vector <char> );
 bool salygos_patenkintos(int taisykle);
 void salygos(std::string taisykle);
-void print_answer(std::vector <std::string> vektorius);
+void print_answer(std::vector <int> vektorius);
 
 extern std::vector<char> faktai;
 extern std::string tikslas;
