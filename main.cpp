@@ -98,8 +98,9 @@ void spausdinti(){		//funkcija, spausdinanti duomenis, nuskaitytus is failo
 
 bool ivesti(){		//funkcija, kurios pagalba nuskaitomi duomenys is failo
 	string fileName;
-	cout << "iveskite duomenu failo pavadinima: " << endl;//asks user to input filename
-	cin >> fileName; //inputs user input into fileName
+//	cout << "iveskite duomenu failo pavadinima: " << endl;//asks user to input filename
+//	cin >> fileName; //inputs user input into fileName
+	fileName = "input5.txt";
 	ifstream duomenys (fileName.c_str());
 	string line;
 	if (duomenys.is_open())
