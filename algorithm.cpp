@@ -8,116 +8,97 @@
 #include <algorithm>
 
 vector<char> faktai;
-vector<char> objektai;
 string tikslas;
 vector<string> taisykles;
-vector<int> panaudotos_produkcijos;
+vector<int> panaudotos_taisykles;
 vector<char> ieskoti_tikslai;
 char tmp = ' ';
 vector<int> kelias;
 bool need_to_print = true;
 int zingsniu_skaicius = 0;
-int checkIfRepeats = 0;
+int zingsnis_kartojas = 0;
 char buves_tikslas;
 
-
-
-vector<int> backward_chaining(char tikslas_new, int lygis){
+vector<int> backward_chaining(char goal, int lygis){
 	bool rasta_produkcija = false;
 	bool aklaviete = false;
 	bool ciklas = false;
 	vector<int> reikalingos_taisykles;
 
-	if (ar_tikslas_tarp_faktu(tikslas_new)){	//galbut tikslas jau egzistuoja tarp faktu
+	zingsniu_skaicius++;
+	print_zingsniai(zingsniu_skaicius, lygis);
+	cout << "Tikslas "<< goal <<". ";
+// 1: Tikriname ar tisklas nėra tarp duotųjų faktų
+	if (ar_tikslas_tarp_faktu(goal) ){
+// 2: Jei yra, tuomet išeiti
 		exit(0);
 	}
-	zingsniu_skaicius++;
-	cout << zingsniu_skaicius;
-	for (int i = 0; i < lygis+1; ++i) {
-		cout << "  ";
-	}
-
-	cout << "Tikslas "<< tikslas_new <<"; ";
 	need_to_print = false;
-//	cout << "ieskoti_tikslai: [";
-//	print_vector(ieskoti_tikslai);
-//	cout << "]\n";
-	//Ieskome taisykliu, reikalingu tikslui pasiekti:
+// 3: Jei tikslas nėra jau ieškotas
 	if(std::find(ieskoti_tikslai.begin(), ieskoti_tikslai.end(),
-								 tikslas_new) == ieskoti_tikslai.end()){ // tikslo nera tarp panaudotu tikslu
-//			cout <<  "tikslo " <<tikslas_new<< "nera tarp panaudotu isvadu\n";
+								 goal) == ieskoti_tikslai.end()){
 			rasta_produkcija = false;
-			//Einame per visas taisykles
+// 4: Einame per visas taisykles:
 			for (int i = 0; i < taisykles.size() ; i++ ) {
-//				cout << "einame per taisykle " << i+1 << "\n";
-				if ( std::find(panaudotos_produkcijos.begin(),	//ar produkcija yra tarp panaudotu produkciju
-							panaudotos_produkcijos.end(), i)!=panaudotos_produkcijos.end() ){
-
-//					cout << "Taisykle R"<< i+1<<" jau panaudota\n";
-				}
-				else { // Jei taisykle nepanaudota
-					//jei taisykles gaminamas faktas yra musu potikslis
-					if (taisykles[i][0] == tikslas_new){
-//						cout << "Taisykle R"<< i+1<<" nepanaudota\n";
-//						cout <<"Randame R"
-//							<< i+1 << " produkcijoje\n";
+// 5: Jei taisyklė yra nepanaudota:
+				if ( std::find(panaudotos_taisykles.begin(),	// ar produkcija yra tarp panaudotu produkciju:
+							panaudotos_taisykles.end(), i)==panaudotos_taisykles.end() ){
+// 6: Jei taisyklė veda į tikslą
+					if (taisykles[i][0] == goal)
+// 7: Tuomet pradėti
+					{
+// 8: Pasižymime ją kaip reikalingą:
 						reikalingos_taisykles.push_back(i);
-//						cout <<" reikalingos taisykles vektorius: " ;
-//						print_vector(reikalingos_taisykles);
+// 9: Pasižymime, kad radome į tikslą vedančią taisyklę
 						rasta_produkcija = true;
+// 10: Baigti
 					}
 				}
-
+// 11: Baigiame eiti per taisykles
 			}
+// 12: Jei nė viena taisyklė nerasta,
 			if (!rasta_produkcija) {
-				cout << "Aklaviete. Tikslo isvesti negalima\n";
-				tmp = tikslas_new;
-				//return;
+// 13: Vadinasi pasiekėme aklavietę:
+				cout << "Aklavietė (nėra taisyklių).\n";
+				tmp = goal;
 			}
 	}
+// 14: Jei tikslas jau buvo ieškotas, vadinasi priėjome ciklą:
 	else {
-		cout << "Ciklas\n";
-		tmp = tikslas_new;
-		//return;
-
+		cout << "Ciklas.\n";
+		tmp = goal;
 	}
+// 15: Einame per tikslui pasiekti reikalingas taisykles
 	for (int rule = 0; rule < reikalingos_taisykles.size(); ++rule) {
 		int taisykle = reikalingos_taisykles[rule];
-//		cout <<" reikalingos taisykles vektorius veliau cikle: " ;
-								//print_vector(reikalingos_taisykles);
-//		cout << "einame per reikalinga taisykle "<< taisykle+1 << "\n";
-//		cout << "i ieskoti_tikslai bus pridedama " << taisykles[taisykle][0]<< "\n";
 		ieskoti_tikslai.push_back(taisykles[taisykle][0]); // pazymime, kad taisykles isvados jau ieskojome
-		panaudotos_produkcijos.push_back(taisykle); //prie kelio pridedame sia taisykle
+		panaudotos_taisykles.push_back(taisykle); // prie kelio pridedame sia taisykle
 		vector <int> rastu_taisykliu_list;
 		bool patenkintos_salygos = true;
 		if (need_to_print){
 			zingsniu_skaicius++;
-			cout << zingsniu_skaicius;
-			for (int i = 0; i < lygis+1; ++i) {
-				cout << "  ";
-			}
-			cout << "Tikslas "<< tikslas_new <<"; ";
+			print_zingsniai(zingsniu_skaicius, lygis);
+			cout << "Tikslas "<< goal <<". ";
 		}
 
-		cout << "Randame R" << taisykle+1 << "; ";
+		cout << "Randame R" << taisykle+1 << print_taisykle(taisykle) << ". ";
 		cout << "Nauji tikslai: ";
 		salygos(taisykles[taisykle]);
-		cout << "\n";
+		cout << ".\n";
 		kelias.push_back(taisykle);
-//		for (int spaces = 0; spaces < lygis; ++spaces) {
-//									cout << "  ";
-//								}
-		//cout << "tiksle "<< tikslas_new <<" einama per taisykles " << taisykle+1 << " sakygas, taisyke vektoriuje "<<rule <<" \n";
-		for (int i = 1; i < taisykles[taisykle].size(); ++i) {
+		bool ivykdoma = true;
+// 16: Einame per taisyklės salygas:
+		for (int i = 1; i < taisykles[taisykle].size() && ivykdoma; ++i) {
 			char salyga = taisykles[taisykle].at(i);
+// 17: Jei taisyklės sąlygos nėra tarp faktų:
 			if (std::find(faktai.begin(), faktai.end(),
-								 salyga)==faktai.end()) { // jei taisykles salyga nerasta tarp faktu
-//				cout << "salyga "<< salyga<<" nerasta tarp faktu\n";
+								 salyga)==faktai.end()) {
 				vector <int> kelias_temp;
 				patenkintos_salygos = false;
-//				cout << "bus kvieciamas bc salygai "<<salyga<< "\n";
+// 18: Tuomet tą salygą pridedame kaip tarpinį tikslą:
 				kelias_temp = backward_chaining(salyga, lygis+1);
+				if (kelias_temp.size() == 0)
+					ivykdoma = false;
 				for (int j = 0; j < kelias_temp.size(); ++j) {
 					rastu_taisykliu_list.push_back(kelias_temp[j]);
 				}
@@ -125,105 +106,122 @@ vector<int> backward_chaining(char tikslas_new, int lygis){
 			if (tmp == ' '){
 				zingsniu_skaicius++;
 				tmp = salyga;
-				cout << zingsniu_skaicius;
-				for (int i = 0; i < lygis+2; ++i) {
-						cout << "  ";
-					}
+				print_zingsniai(zingsniu_skaicius, lygis+1);
 				cout << "Tikslas "<< salyga;
-						cout << "; Duotas faktas\n";
+						cout << ". Duotas faktas.\n";
 			}
 			else {
 				if(tmp != salyga){
 					tmp = salyga;
 					zingsniu_skaicius++;
-					cout << zingsniu_skaicius;
-					for (int i = 0; i < lygis+2; ++i) {
-							cout << "  ";
-						}
+					print_zingsniai(zingsniu_skaicius, lygis+1);
 					cout << "Tikslas "<< salyga;
-							cout <<"; Duotas faktas\n";
+							cout <<". Duotas faktas.\n";
 				}
 				else {
 					tmp = ' ';
 				}
 			}
+// 19: Baigiame eiti per taisykles
 		}
-
+// 20: Jei taisyklės visos sąlygos yra patenkintos:
 		if (salygos_patenkintos(taisykle)) {
 			char isvada = taisykles[taisykle][0];
 			faktai.push_back(isvada);
 			rastu_taisykliu_list.push_back(taisykle);
 			zingsniu_skaicius++;
-			cout << zingsniu_skaicius;
-			for (int i = 0; i < lygis+1; ++i) {
-				cout << "  ";
-			}
+			print_zingsniai(zingsniu_skaicius, lygis);
 			cout << "Tikslas "<< taisykles[taisykle][0];
-			cout << "; Naujai gautas faktas. \n";
+			cout << ". Naujai gautas faktas. \n";
 			tmp = taisykles[taisykle][0];
+// 21: Tuomet grąžiname rastų taisyklių sąrašą (vektorių):
 			return rastu_taisykliu_list;
 		}
 		else {
-			if (checkIfRepeats == zingsniu_skaicius){
+			if (zingsnis_kartojas == zingsniu_skaicius){
 				zingsniu_skaicius++;
-				cout << zingsniu_skaicius;
-				for (int i = 0; i < lygis+1; ++i) {
-					cout << "  ";
-				}
+				print_zingsniai(zingsniu_skaicius, lygis);
 				cout << "Tikslas "<< buves_tikslas;
-				cout << "Fakto isvesti neimanoma\n";\
-				checkIfRepeats = 0;
+				cout << ". Išvesti neįmanoma.\n";
+				zingsnis_kartojas = 0;
 			}
 			else {
-				checkIfRepeats = zingsniu_skaicius;
-				buves_tikslas = tikslas_new;
+				zingsnis_kartojas = zingsniu_skaicius;
+				buves_tikslas = goal;
 			}
 			need_to_print = true;
 			tmp = taisykles[taisykle][0];
 		}
-		vector<int>::iterator position = std::find(panaudotos_produkcijos.begin(), panaudotos_produkcijos.end(), taisykle);
-		if (position != panaudotos_produkcijos.end()) // == vector.end() means the element was not found
-			panaudotos_produkcijos.erase(position);
-//		panaudotos_produkcijos;//pasalinti taisykle
+		// taisyklė pašalinama iš panaudotų produkcijų sąrašo:
+		vector<int>::iterator position = std::find(panaudotos_taisykles.begin(), panaudotos_taisykles.end(), taisykle);
+		if (position != panaudotos_taisykles.end())
+			panaudotos_taisykles.erase(position);
+		// taisyklės išvada pašalinama iš	ieškotų tikslų sąrašo:
 		vector<char>::iterator position2 = std::find(ieskoti_tikslai.begin(), ieskoti_tikslai.end(), taisykles[taisykle][0]);
-				if (position2 != ieskoti_tikslai.end()) // == vector.end() means the element was not found
+				if (position2 != ieskoti_tikslai.end())
 					ieskoti_tikslai.erase(position2);
-//		ieskoti_tikslai//pasalinti taisykles isvada;
-
+// 22: Baigiame eiti per reikalingas taisykles
 	}
 	if (need_to_print){
 		zingsniu_skaicius++;
-	cout << zingsniu_skaicius;
-	for (int i = 0; i < lygis+1; ++i) {
-		cout << "  ";
+		print_zingsniai(zingsniu_skaicius, lygis);
+		cout << "Tikslas "<< goal <<". ";
+		cout << "Išvesti neįmanoma.\n";
 	}
-	cout << "Tikslas "<< tikslas_new <<"; ";
-	cout << "Fakto isvesti neimanoma.\n";}
 	vector <int> empty;
+// 23: Gražiname tuščią vektorių:
 	return empty;
-
 }
 
+string print_taisykle(int taisykle){
+	string pilna_taisykle;
+	pilna_taisykle+=": ";
+	for (int i = 1; i < taisykles[taisykle].size(); ++i) {
+		pilna_taisykle+=taisykles[taisykle][i];
+		if (i != taisykles[taisykle].size()-1)
+			pilna_taisykle+=", ";
+	}
+	pilna_taisykle+=" -> ";
+	pilna_taisykle+=taisykles[taisykle][0];
+	return pilna_taisykle;
+}
 void print_vector(vector <int> vektorius){
 	for (int el = 0; el < vektorius.size(); ++el) {
 		cout << vektorius[el] << " ";
 	}
 	cout << endl;
 }
-void print_answer(vector <int> vektorius){
-	cout << "\nPlanas: {";
-	int dydis = vektorius.size();
-	for (int el = 0; el < dydis; ++el) {
-		if (el == dydis-1)
-			cout <<"R"<<  vektorius[el]+1;
-		else
-			cout <<"R"<<  vektorius[el]+1 << ", ";
+void print_answer(vector <int> vektorius, bool pasiekiamas){
+	cout << "\n3) Rezultatas:\n";
+	if (pasiekiamas){
+		cout << "\n  Tikslas " << tikslas << " pasiekiamas. ";
+		cout << "Planas: {";
+		int dydis = vektorius.size();
+		for (int el = 0; el < dydis; ++el) {
+			if (el == dydis-1)
+				cout <<"R"<<  vektorius[el]+1;
+			else
+				cout <<"R"<<  vektorius[el]+1 << ", ";
+		}
+		cout << "}\n";
+		if (vektorius.size() == 0)
+			cout << "\nPrograma baigia darbą\n";
 	}
-	cout << "}\n";
+	else
+		cout << "\n  Tikslas nepasiekiamas. \n";
+}
+void print_zingsniai(int zingsniai, int lygis){
+	cout <<"  " << zingsniai;
+	for (int i = 0; i < lygis+1; ++i) {
+		cout << "  ";
+	}
 }
 void salygos(string taisykle){
 	for (int simb = 1; simb < taisykle.length(); ++simb) {
-		cout << taisykle[simb] << " ";
+		if (simb == taisykle.length()-1)
+			cout << taisykle[simb];
+		else
+			cout << taisykle[simb] << ", ";
 	}
 }
 bool salygos_patenkintos(int taisykle){
@@ -241,67 +239,19 @@ void print_vector(vector <char> vektorius){
 	}
 	cout << endl;
 }
-void spausdinti_busena(){//spausdina tam tikro zingsnio busena
-												 			//t.y. turimus objektus
-	cout << "Busena: {";
-	for (int i = 0; i < objektai.size(); i++) {
-		if (i == objektai.size()-1)
-			cout << objektai[i];
-		else
-			cout << objektai[i] << ", ";
-	}
-	cout << "}\n";
-}
-void spausdinti_plana(){//funkcija spausdina rasta plana
-	cout << "Planas: {";
-	for (int j = panaudotos_produkcijos.size()-1;  j >=0 ; j-- ) {
-		if (j == 0)
-			cout << "R" << panaudotos_produkcijos[j]+1;
-		else
-			cout << "R" << panaudotos_produkcijos[j]+1 << ", ";
-	}
-	cout << "}\n";
-}
-void vykdyti_produkcija(int nr, bool& ivykdyta){
-												//funkcija, kuri ivykdo produkcija, pazymeta
-												//numeriu 'nr' ir pazymi ar produkcija buvo ivykdyta
-												//veliavoje 'ivykdyta'
-	cout << "      Produkcija R"<< nr+1<<" vykdoma; ";
-	objektai.push_back(taisykles[nr][0]);
-	ivykdyta = true;
-	panaudotos_produkcijos.push_back(nr);
-}
+
 bool ar_tikslas_tarp_faktu(char tikslas_new){//dar nepradejus algoritmo vykdymo tikrina
 							//ar tikslas jau egzistuoja tarp faktu
 	bool tarp_duotu = false;
-	bool tarp_nauju = false;
 	for (int i = 0; i < faktai.size(); i++) {
 		if ( faktai[i] == tikslas_new)
 			tarp_duotu = true;
 	}
-	if (tarp_duotu)
-		cout << "Tikslas yra tarp faktu. \n";
+	if (tarp_duotu){
+		cout << "Duotas faktas.\n";
+		vector<int> empty;
+		print_answer(empty, true);
+	}
 
 	return (tarp_duotu );
-}
-bool tikslas_pasiekiamas(){//tikrina ar tikslas pasiekiamas
-													 	//t.y. ar jis egzistuoja tarp produkciju desiniu pusiu
-	bool imanoma = false;
-	for (int i = 0; i < taisykles.size(); i++) {
-		for (int j = 0; j < taisykles[i].size(); j++) {
-			if (tikslas[0] == taisykles[i][0])
-				imanoma = true;
-		}
-	}
-	for (int i = 0; i < faktai.size(); i++) {
-		if (tikslas[0] == faktai[i])
-				imanoma = true;
-	}
-	if (!imanoma) {
-		cout << "\n3)Rezultatas\n";
-		cout << "      Tikslo "<< tikslas[0]<<" pasiekti neimanoma\n";
-		return false;
-	}
-	else
-		return true;
 }

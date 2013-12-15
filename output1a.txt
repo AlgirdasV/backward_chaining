@@ -1,0 +1,32 @@
+ï»¿Programa pradeda darbà
+
+1) Duomenys ið failo:
+
+  Taisyklës 
+    R1: F, B -> Z
+    R2: C, D -> F
+    R3: A    -> D
+
+  Pradiniai faktai 
+    A, B, C
+
+  Tikslas 
+    Z
+
+2) Vykdymo þingsniai:
+
+  1  Tikslas Z. Randame R1: F, B -> Z. Nauji tikslai: F, B.
+  2    Tikslas F. Randame R2: C, D -> F. Nauji tikslai: C, D.
+  3      Tikslas C. Duotas faktas.
+  4      Tikslas D. Randame R3: A -> D. Nauji tikslai: A.
+  5        Tikslas A. Duotas faktas.
+  6      Tikslas D. Naujai gautas faktas. 
+  7    Tikslas F. Naujai gautas faktas. 
+  8    Tikslas B. Duotas faktas.
+  9  Tikslas Z. Naujai gautas faktas. 
+
+3) Rezultatas:
+
+  Tikslas Z pasiekiamas. Planas: {R3, R2, R1}
+
+Programa baigia darbà

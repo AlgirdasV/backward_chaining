@@ -1,13 +1,12 @@
 1) Taisyklės
-Z D C			// R1 : D, C -> Z
-D C				// R2 : C -> D
-C B				// R3 : B -> C
-B A				// R4 : A -> B
-A D				// R5 : D -> A
-D T				// R6 : T -> D
-A G				// R7 : G -> A
-B H				// R8 : H -> B
-C J				// R9 : J -> C
+Z D C               // R1: D, C -> Z
+D C                 // R2: C -> D
+C B                 // R3: B -> C
+B A                 // R4: A -> B
+A D                 // R5: D -> A
+A G                 // R6: G -> A
+B H                 // R7: H -> B
+C J                 // R8: J -> C
 
 2) Faktai
 T

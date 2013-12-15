@@ -1,5 +1,5 @@
 1) Taisyklės
-Z C D               // R1: C, D -> Z
+Z D C               // R1: D, C -> Z
 D C                 // R2: C -> D
 C B                 // R3: B -> C
 B A                 // R4: A -> B

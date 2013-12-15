@@ -1,0 +1,26 @@
+
+Programa pradeda darbą
+
+1) Duomenys iš failo:
+
+  Taisyklės 
+    R1: N -> M
+    R2: A -> D
+    R3: D -> K
+    R4: B -> A
+
+  Pradiniai faktai 
+    A, B, C, Z
+
+  Tikslas 
+    Z
+
+2) Vykdymo žingsniai:
+
+  1  Tikslas Z. Duotas faktas.
+
+3) Rezultatas:
+
+  Tikslas Z pasiekiamas. Planas: {}
+
+Programa baigia darbą

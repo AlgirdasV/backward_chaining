@@ -1,0 +1,10 @@
+1) Taisyklės
+Z F B        // R1 : F, B -> Z
+F C D        // R2 : C, D -> F
+D A          // R3 : A -> D
+
+2) Faktai
+A B C
+
+3) Tikslas
+Z

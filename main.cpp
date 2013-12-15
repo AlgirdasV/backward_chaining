@@ -18,14 +18,18 @@ void remove_comment_and_spaces(string& line);
 int main( int argc, const char* argv[] )	//pagrindine funkcija, 	
 														//nuskaito ir atspausdina failo duomenis,														
 {														//bei paleidzia tiesioginio isvedimo algoritma.
-	cout << "\nPrograma pradeda darba\n\n";
+	cout << "\nPrograma pradeda darbą\n";
 	vector<int> atsakymas;
 	if ( ivesti() ){
 		spausdinti();
+		cout << "2) Vykdymo žingsniai:\n\n";
 		atsakymas = backward_chaining(tikslas[0], 0);
 	}
-	print_answer(atsakymas);
-	cout << "\nPrograma baigia darba\n";
+	bool pasiekiamas = true;
+	if (atsakymas.size()==0)
+		pasiekiamas = false;
+	print_answer(atsakymas, pasiekiamas);
+	cout << "\nPrograma baigia darbą\n";
 }
 
 void remove_comment_and_spaces(string& line){//funkcija, salinanti 
@@ -58,14 +62,14 @@ void remove_carriage_return(std::string& line){//funkcija, salinanti "\r" simbol
 }
 
 void spausdinti(){		//funkcija, spausdinanti duomenis, nuskaitytus is failo
-	cout << "\n1)Duomenys is failo:" << endl;
+	cout << "\n1) Duomenys iš failo:" << endl;
 	int ilgis = 0;
 
 	for (int i = 0; i < taisykles.size(); i++){
 		if ( ilgis < taisykles[i].length() )
 			ilgis = taisykles[i].length();
 	}
-	cout << "\n  Taisykles \n";
+	cout << "\n  Taisyklės \n";
 	for (int i = 0; i < taisykles.size(); i++){
 		cout <<"    R"<<i+1<<": ";
 		for (int j = 1; j < taisykles[i].length(); j++){
@@ -100,7 +104,7 @@ bool ivesti(){		//funkcija, kurios pagalba nuskaitomi duomenys is failo
 	string fileName;
 //	cout << "iveskite duomenu failo pavadinima: " << endl;//asks user to input filename
 //	cin >> fileName; //inputs user input into fileName
-	fileName = "input5.txt";
+	fileName = "andriaus/input3.txt";
 	ifstream duomenys (fileName.c_str());
 	string line;
 	if (duomenys.is_open())
@@ -109,7 +113,7 @@ bool ivesti(){		//funkcija, kurios pagalba nuskaitomi duomenys is failo
   		remove_carriage_return(line);
   		remove_comment_and_spaces(line);
   		if (line.compare("1)Taisyklės") != 0){
-  			cout << "Faile nerasta zymes 1) Taisyklės. ";
+  			cout << "Faile nerasta žymes 1) Taisyklės. ";
   			return false;
   		}
   		bool baigta = false;
@@ -127,7 +131,7 @@ bool ivesti(){		//funkcija, kurios pagalba nuskaitomi duomenys is failo
   		remove_carriage_return(line);
   		remove_comment_and_spaces(line);
   		if (line.compare("2)Faktai") != 0){
-  			cout << "Faile nerasta zymes 2) Faktai. ";
+  			cout << "Faile nerasta žymes 2) Faktai. ";
   			return false;
   		}
 		baigta = false;
@@ -148,7 +152,7 @@ bool ivesti(){		//funkcija, kurios pagalba nuskaitomi duomenys is failo
   		remove_carriage_return(line);
   		remove_comment_and_spaces(line);
   		if (line.compare("3)Tikslas") != 0){
-  			cout << "Faile nerasta zymes 3) Tikslas. ";
+  			cout << "Faile nerasta žymes 3) Tikslas. ";
   			return false;
   		}
 		getline( duomenys, tikslas);

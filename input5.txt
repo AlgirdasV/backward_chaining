@@ -1,16 +1,11 @@
 1) Taisyklės
-Z D C			// R1 : D, C -> Z
-D C				// R2 : C -> D
-C B				// R3 : B -> C
-B A				// R4 : A -> B
-A D				// R5 : D -> A
-D T				// R6 : T -> D
-A G				// R7 : G -> A
-B H				// R8 : H -> B
-C J				// R9 : J -> C
+M N                 // R1: N -> M
+D A                 // R2: A -> D
+K D                 // R3: D -> K
+A B                 // R4: B -> A
 
 2) Faktai
-T
+A B C Z
 
 3) Tikslas
 Z

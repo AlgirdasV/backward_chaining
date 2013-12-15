@@ -1,0 +1,56 @@
+
+Programa pradeda darbą
+
+1) Duomenys iš failo:
+
+  Taisyklės 
+    R1: D, C -> Z
+    R2: C    -> D
+    R3: B    -> C
+    R4: A    -> B
+    R5: D    -> A
+    R6: T    -> D
+    R7: G    -> A
+    R8: H    -> B
+    R9: J    -> C
+
+  Pradiniai faktai 
+    T
+
+  Tikslas 
+    Z
+
+2) Vykdymo žingsniai:
+
+  1  Tikslas Z. Randame R1: D, C -> Z. Nauji tikslai: D, C.
+  2    Tikslas D. Randame R2: C -> D. Nauji tikslai: C.
+  3      Tikslas C. Randame R3: B -> C. Nauji tikslai: B.
+  4        Tikslas B. Randame R4: A -> B. Nauji tikslai: A.
+  5          Tikslas A. Randame R5: D -> A. Nauji tikslai: D.
+  6            Tikslas D. Ciklas.
+  7          Tikslas A. Randame R7: G -> A. Nauji tikslai: G.
+  8            Tikslas G. Aklavietė (nėra taisyklių).
+  9          Tikslas A. Išvesti neįmanoma.
+  10        Tikslas B. Randame R8: H -> B. Nauji tikslai: H.
+  11          Tikslas H. Aklavietė (nėra taisyklių).
+  12        Tikslas B. Išvesti neįmanoma.
+  13      Tikslas C. Randame R9: J -> C. Nauji tikslai: J.
+  14        Tikslas J. Aklavietė (nėra taisyklių).
+  15      Tikslas C. Išvesti neįmanoma.
+  16    Tikslas D. Randame R6: T -> D. Nauji tikslai: T.
+  17      Tikslas T. Duotas faktas.
+  18    Tikslas D. Naujai gautas faktas. 
+  19    Tikslas C. Randame R3: B -> C. Nauji tikslai: B.
+  20      Tikslas B. Randame R4: A -> B. Nauji tikslai: A.
+  21        Tikslas A. Randame R5: D -> A. Nauji tikslai: D.
+  22          Tikslas D. Duotas faktas.
+  23        Tikslas A. Naujai gautas faktas. 
+  24      Tikslas B. Naujai gautas faktas. 
+  25    Tikslas C. Naujai gautas faktas. 
+  26  Tikslas Z. Naujai gautas faktas. 
+
+3) Rezultatas:
+
+  Tikslas Z pasiekiamas. Planas: {R6, R5, R4, R3, R1}
+
+Programa baigia darbą

@@ -5,16 +5,14 @@
 #include <string>
 
 std::vector<int> backward_chaining(char, int);
-bool tikslas_pasiekiamas();
-void vykdyti_produkcija(int, bool& );
 bool ar_tikslas_tarp_faktu(char);
-void spausdinti_plana();
-void spausdinti_busena();
 void print_vector(std::vector <int> );
 void print_vector(std::vector <char> );
+void print_zingsniai(int, int );
 bool salygos_patenkintos(int taisykle);
 void salygos(std::string taisykle);
-void print_answer(std::vector <int> vektorius);
+void print_answer(std::vector <int> vektorius, bool);
+std::string print_taisykle(int);
 
 extern std::vector<char> faktai;
 extern std::string tikslas;

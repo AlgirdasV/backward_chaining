@@ -1,0 +1,46 @@
+
+Programa pradeda darbą
+
+1) Duomenys iš failo:
+
+  Taisyklės 
+    R1: D, C -> Z
+    R2: C    -> D
+    R3: B    -> C
+    R4: A    -> B
+    R5: D    -> A
+    R6: G    -> A
+    R7: H    -> B
+    R8: J    -> C
+
+  Pradiniai faktai 
+    T
+
+  Tikslas 
+    Z
+
+2) Vykdymo žingsniai:
+
+  1  Tikslas Z. Randame R1: D, C -> Z. Nauji tikslai: D, C.
+  2    Tikslas D. Randame R2: C -> D. Nauji tikslai: C.
+  3      Tikslas C. Randame R3: B -> C. Nauji tikslai: B.
+  4        Tikslas B. Randame R4: A -> B. Nauji tikslai: A.
+  5          Tikslas A. Randame R5: D -> A. Nauji tikslai: D.
+  6            Tikslas D. Ciklas.
+  7          Tikslas A. Randame R6: G -> A. Nauji tikslai: G.
+  8            Tikslas G. Aklavietė (nėra taisyklių).
+  9          Tikslas A. Išvesti neįmanoma.
+  10        Tikslas B. Randame R7: H -> B. Nauji tikslai: H.
+  11          Tikslas H. Aklavietė (nėra taisyklių).
+  12        Tikslas B. Išvesti neįmanoma.
+  13      Tikslas C. Randame R8: J -> C. Nauji tikslai: J.
+  14        Tikslas J. Aklavietė (nėra taisyklių).
+  15      Tikslas C. Išvesti neįmanoma.
+  16    Tikslas D. Išvesti neįmanoma.
+  17  Tikslas Z. Išvesti neįmanoma.
+
+3) Rezultatas:
+
+  Tikslas nepasiekiamas. 
+
+Programa baigia darbą

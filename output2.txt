@@ -1,0 +1,44 @@
+
+Programa pradeda darbą
+
+1) Duomenys iš failo:
+
+  Taisyklės 
+    R1: C, D -> Z
+    R2: C    -> D
+    R3: B    -> C
+    R4: A    -> B
+    R5: D    -> A
+    R6: T    -> D
+    R7: G    -> A
+    R8: H    -> B
+    R9: J    -> C
+
+  Pradiniai faktai 
+    T
+
+  Tikslas 
+    Z
+
+2) Vykdymo žingsniai:
+
+  1  Tikslas Z. Randame R1: C, D -> Z. Nauji tikslai: C, D.
+  2    Tikslas C. Randame R3: B -> C. Nauji tikslai: B.
+  3      Tikslas B. Randame R4: A -> B. Nauji tikslai: A.
+  4        Tikslas A. Randame R5: D -> A. Nauji tikslai: D.
+  5          Tikslas D. Randame R2: C -> D. Nauji tikslai: C.
+  6            Tikslas C. Ciklas.
+  7          Tikslas D. Randame R6: T -> D. Nauji tikslai: T.
+  8            Tikslas T. Duotas faktas.
+  9          Tikslas D. Naujai gautas faktas. 
+  10        Tikslas A. Naujai gautas faktas. 
+  11      Tikslas B. Naujai gautas faktas. 
+  12    Tikslas C. Naujai gautas faktas. 
+  13    Tikslas D. Duotas faktas.
+  14  Tikslas Z. Naujai gautas faktas. 
+
+3) Rezultatas:
+
+  Tikslas Z pasiekiamas. Planas: {R6, R5, R4, R3, R1}
+
+Programa baigia darbą
